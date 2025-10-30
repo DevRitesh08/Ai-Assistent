@@ -19,7 +19,7 @@ export class AIService {
     return `AI response to: "${prompt}" (Integration coming soon!)`;
   }
 
-  async analyzeWebpage(content: string): Promise<any> {
+  async analyzeWebpage(_content: string): Promise<any> {
     // TODO: Implement webpage analysis
     console.log('Analyzing webpage content...');
     return {
