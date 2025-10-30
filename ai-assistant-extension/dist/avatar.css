@@ -1,0 +1,19 @@
+/* Avatar overlay styles */
+.ai-assistant-avatar-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
+  z-index: 999999;
+  pointer-events: auto;
+  cursor: move;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.ai-assistant-avatar-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 30px rgba(74, 144, 226, 0.4);
+}
