@@ -37,10 +37,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tab.id) {
       chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_AVATAR' }, (response) => {
         console.log('Avatar toggled:', response);
-        if (response && response.success) {
+        if (chrome.runtime.lastError) {
+          console.error('Error toggling avatar:', chrome.runtime.lastError);
+          addMessage('Error: Could not toggle avatar', 'error');
+        } else if (response && response.success) {
           addMessage(`Avatar ${response.visible ? 'shown' : 'hidden'}`, 'assistant');
         }
       });
+    } else {
+      console.error('No valid tab ID');
+      addMessage('Error: No active tab', 'error');
     }
   });
 
@@ -51,10 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tab.id) {
       chrome.tabs.sendMessage(tab.id, { type: 'EXTRACT_PAGE_CONTENT' }, (response) => {
         console.log('Page analysis response:', response);
-        if (response && response.success) {
+        if (chrome.runtime.lastError) {
+          console.error('Error analyzing page:', chrome.runtime.lastError);
+          addMessage('Error: Could not analyze page', 'error');
+        } else if (response && response.success) {
           addMessage(`📄 Page analyzed: ${response.content.title}`, 'assistant');
         }
       });
+    } else {
+      console.error('No valid tab ID');
+      addMessage('Error: No active tab', 'error');
     }
   });
 

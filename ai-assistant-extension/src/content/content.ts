@@ -40,16 +40,17 @@ class ContentManager {
     }
   }
 
-  private handleMessage(message: any, sendResponse: Function) {
+  private handleMessage(message: any, sendResponse: (response: any) => void) {
     console.log('📨 Content script received message:', message);
     
     switch (message.type) {
-      case 'TOGGLE_AVATAR':
+      case 'TOGGLE_AVATAR': {
         this.toggleAvatar();
         sendResponse({ success: true, visible: this.isAvatarVisible });
         break;
+      }
 
-      case 'UPDATE_EXPRESSION':
+      case 'UPDATE_EXPRESSION': {
         if (this.avatarRenderer) {
           this.avatarRenderer.setExpression(message.expression);
           sendResponse({ success: true });
@@ -57,11 +58,13 @@ class ContentManager {
           sendResponse({ success: false, error: 'Avatar not initialized' });
         }
         break;
+      }
 
-      case 'EXTRACT_PAGE_CONTENT':
+      case 'EXTRACT_PAGE_CONTENT': {
         const content = this.extractPageContent();
         sendResponse({ success: true, content });
         break;
+      }
 
       default:
         sendResponse({ success: false, error: 'Unknown message type' });

@@ -17,7 +17,7 @@ export class MessageService {
   }
 
   onMessage(callback: (message: any, sender: chrome.runtime.MessageSender) => void) {
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    chrome.runtime.onMessage.addListener((message, sender, _sendResponse) => {
       callback(message, sender);
       return true;
     });

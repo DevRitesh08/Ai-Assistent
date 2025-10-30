@@ -27,6 +27,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     handleAIQuery(message.query, sendResponse);
     return true;
   }
+
+  // Handle other message types by acknowledging them
+  sendResponse({ success: true });
+  return true;
 });
 
 async function handlePageAnalysis(data: any, sendResponse: (response: any) => void) {
